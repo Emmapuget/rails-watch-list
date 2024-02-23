@@ -1,13 +1,21 @@
-<h1>Here your list</h1>
+<h1 class="text-center">Here your list</h1>
 
 <p><%= @list.name %></p>
 
+
 <%@list.bookmarks.each do |bookmark| %>
-  <p><%= bookmark.movie.title %></p>
-  <p><%= bookmark.movie.overview %></p>
-  <img src="<%= bookmark.movie.poster_url %>" alt="" class="width=50%">
-  <p><%= bookmark.comment %></p>
+<div class="card" style="max-width: 400px!important; max-height: 400px!important;">
+  <div style="height: 200px;">
+    <img src="<%=bookmark.movie.poster_url%>" class="card-img-top" alt="">
+  </div>
+  <div class="card-body" style="height: 200px;">
+    <h5 class="card-title"><%= bookmark.movie.title %></h5>
+    <p class="card-text"><%= bookmark.movie.overview %></p>
+    <p class="card-text"><%= bookmark.comment %></p>
+  </div>
+</div>
 <% end %>
+
 <p>Create e bookmark</p>
 
 <%= simple_form_for [@list, @bookmark] do |f| %>
@@ -15,3 +23,5 @@
   <%= f.input :comment%>
   <%= f.button :submit%>
 <% end %>
+
+<%= link_to "Back", lists_path %>
